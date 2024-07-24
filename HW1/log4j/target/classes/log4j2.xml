@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <!--> Log dosyalarını logs klasörü altında topluyorum<-->
+        <Property name="filename">C:\Users\myemi\source\repos\myemirrr\Intern2024\LOG4J\log4j\logs</Property>
+    </Properties>
+    <Appenders>
+        <!-->Dinamik olarak log file name verme<-->
+        <RollingFile name="RollingFileAppender"
+                     fileName="${filename}/${date:HH-mm-dd-MM-yy}.log"
+                     filePattern="${filename}/timer-%d{dd-MM-yy}-%i.log">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+            </PatternLayout>
+            <!-->Trigger polices ile size ve silinme zamanı ayarlama<-->
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="1 KB" />
+
+            </Policies>
+
+
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="trace">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
