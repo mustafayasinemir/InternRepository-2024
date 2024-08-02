@@ -13,7 +13,7 @@ public class Main {
             ClientConfig clientConfig = new ClientConfig();
             Client client = ClientFactory.createClient(clientConfig);
 
-            client.createConnection("172.21.0.2:32772");
+            client.createConnection("localhost:32772");
 
             ClientResponse response = client.callProcedure("GetAllSubscriber");
 
